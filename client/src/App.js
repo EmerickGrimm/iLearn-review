@@ -1,8 +1,11 @@
 import './App.css'
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom'
+import { AuthProvider } from "./contexts/AuthContext.js"
 import Home from "./pages/Home.js"
 import Create from './pages/Create.js'
-import { Container } from "react-bootstrap"
+import Login  from './pages/Login'
+import Signup from './pages/Signup'
+import { Container, Nav, Navbar } from "react-bootstrap"
 
 
 function App() {
@@ -10,12 +13,25 @@ function App() {
     <Container>
       <div className="App">
         <Router>
-          <Link to='/create'>Create A post</Link>
-          <Routes>
-            <Route path='/' exact element={<Home />} />
-            <Route path='/create' exact element={<Create/>} />
+          <AuthProvider>
+            <Navbar bg="light" variant="light">
+              <Container>
+                <Navbar.Brand href="/">Review Proj</Navbar.Brand>
+                <Nav className="me-auto">
+                  <Nav.Link href="/">Home</Nav.Link>
+                  <Nav.Link href="/create">Create a post</Nav.Link>
+                </Nav>
+              </Container>
+            </Navbar>
+            <Routes>
+              <Route path='/' exact element={<Home />} />
+              <Route path='/create' exact element={<Create />} />
+              <Route path='/login' exact element={<Login />} />
+              <Route path='/signup' exact element={<Signup />} />
 
-          </Routes>
+            </Routes>
+          </AuthProvider>
+
         </Router>
       </div>
     </Container>

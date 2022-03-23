@@ -4,7 +4,7 @@ const {Reviews} = require ('../models/')
 
 
 router.get("/", async (req, res)=> {
-    const listOfReviews = await Reviews.findAll()
+    const listOfReviews = await Reviews.findAll({})
     res.json(listOfReviews)
 })
 

@@ -1,8 +1,11 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Select } from 'react-bootstrap';
+import { Navigate } from 'react-router-dom'
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import axios from "axios"
+import { useAuth, auth } from '../contexts/AuthContext'
+
 
 
 
@@ -14,25 +17,31 @@ function Create() {
     const subjectRef = useRef();
     const [rating, setrating] = useState(0);
     const [rcategory, setrcategory] = useState("Фильм");
+    const { currentUser, getAllUsers } = useAuth()
+
+
+    if (!currentUser) {
+        return <Navigate to='/login' />
+    }
 
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if(reviewRef.current.value && categoryRef.current.value && subjectRef.current.value != null){
+        if (reviewRef.current.value && categoryRef.current.value && subjectRef.current.value != null) {
             switch (categoryRef.current.value) {
                 case "1":
                     setrcategory("Фильм")
                     break;
-    
+
                 case "2":
                     setrcategory("Книга")
                     break;
-    
+
                 case "3":
                     setrcategory("Игра")
                     break;
             }
-    
+
             try {
                 await axios.post("http://localhost:3001/reviews", {
                     "author": JSON.stringify(nicknameRef.current.value),
@@ -45,14 +54,14 @@ function Create() {
                 alert(error)
             }
             alert("Теперь все знают твое мнение.")
-        }else{
+        } else {
             alert("Ты не заполнил все поля.")
         }
     }
 
     return (
-        <div>
-            <Card border='dark' bg='light' style={{ marginTop: '50px', width: '90rem' }}>
+        <div className='text-center mb-4'>
+            <Card border='dark' bg='light' style={{ marginTop: '50px' }}>
                 <Form onSubmit={handleSubmit}>
                     <Form.Group>
                         <Form.Label><b> Как тебя зовут?</b></Form.Label>
@@ -66,8 +75,8 @@ function Create() {
                             <option value="3">Игра</option>
                         </Form.Select>
                         <Form.Label><b>Что ты думаешь?</b></Form.Label>
-                        <Form.Control as="textarea" rows={5} style={{ marginLeft: '200px', marginBottom: '20px', width: '1000px' }} ref={reviewRef} />
-                        <Typography component="legend"><b>Какую оценку дашь?</b></Typography>
+                        <Form.Control as="textarea" data-provide="markdown" rows={5} style={{ marginLeft: '200px', marginBottom: '20px', width: '1000px' }} ref={reviewRef} />
+                        <Typography component="legend"><b>Как оценишь?</b></Typography>
                         <Rating size="large" value={rating} onChange={(event, newValue) => {
                             setrating(newValue);
                         }}
