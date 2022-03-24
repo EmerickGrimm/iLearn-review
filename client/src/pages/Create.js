@@ -80,7 +80,7 @@ function Create() {
                     break;
             }
             try {
-                await axios.post("http://localhost:3001/reviews", {
+                await axios.post("https://grimm-ilearn-review-api.herokuapp.com/reviews", {
                     "author": JSON.stringify(nicknameRef.current.value),
                     "subject": JSON.stringify(subjectRef.current.value),
                     "review": JSON.stringify(reviewRef.current.value),
