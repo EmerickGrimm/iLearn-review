@@ -10,7 +10,7 @@ function Home() {
     const { login, currentUser } = useAuth()
 
     useEffect(() => {
-        axios.get("https://grimm-ilearn-review-api.herokuapp.com/reviews").then((response) => {
+        axios.get("http://localhost:3001/reviews").then((response) => {
             setListOfReviews(response.data)
         })
     }, []);

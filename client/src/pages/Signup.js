@@ -47,10 +47,6 @@ export default function Signup() {
                     <h2 className='text-center mb-4'>Sign Up</h2>
                     <Form onSubmit={handleSubmit}>
                         {error && <Alert variant='danger'>{error}</Alert>}
-                        <Form.Group id="name">
-                            <Form.Label>Ник</Form.Label>
-                            <Form.Control type='name' required ref={nickname} />
-                        </Form.Group>
                         <Form.Group id="email">
                             <Form.Label>Email</Form.Label>
                             <Form.Control type='email' required ref={emailRef} />

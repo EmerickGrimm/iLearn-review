@@ -61,7 +61,11 @@ function Create() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        if (reviewRef.current.value && categoryRef.current.value && subjectRef.current.value != null) {
+        if (reviewRef.current.value && categoryRef.current.value && subjectRef.current.value && nicknameRef.current.value != null) {
+            if (nicknameRef.current.value == "") { // <- Доп костыль, потому что какого-то хрена именно это поле считает что пустое поле это не null а ""
+                alert("Так как тебя зовут то?")
+                return
+            }
             switch (categoryRef.current.value) {
                 case "1":
                     setrcategory("Фильм")
@@ -76,7 +80,7 @@ function Create() {
                     break;
             }
             try {
-                await axios.post("https://grimm-ilearn-review-api.herokuapp.com/reviews", {
+                await axios.post("http://localhost:3001/reviews", {
                     "author": JSON.stringify(nicknameRef.current.value),
                     "subject": JSON.stringify(subjectRef.current.value),
                     "review": JSON.stringify(reviewRef.current.value),
@@ -87,6 +91,7 @@ function Create() {
                 alert(error)
             }
             alert("Теперь все знают твое мнение.")
+            return <Navigate to='/' /> 
         } else {
             alert("Ты не заполнил все поля.")
         }
