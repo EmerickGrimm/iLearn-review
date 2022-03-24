@@ -9,7 +9,11 @@ app.use(cors())
 
 //Routers
 const reviewRouter = require('./routes/Reviews')
+const usersRouter = require('./routes/Users')
+
 app.use('/reviews', reviewRouter);
+app.use('/users', usersRouter);
+
 
 db.sequelize.sync().then(() => {
     app.listen(3001, () => {

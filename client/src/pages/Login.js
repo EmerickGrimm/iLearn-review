@@ -19,7 +19,6 @@ export default function Login() {
         if (currentUser) {
             return <Navigate to='/' />
         }
-    
 
         try {
             setError("")

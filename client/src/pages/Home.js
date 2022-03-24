@@ -2,16 +2,17 @@ import React from 'react'
 import axios from "axios"
 import { useEffect, useState } from 'react'
 import { Card } from 'react-bootstrap';
+import { useAuth } from '../contexts/AuthContext.js'
 
 
 function Home() {
     const [listOfReviews, setListOfReviews] = useState([]);
+    const { login, currentUser } = useAuth()
 
     useEffect(() => {
         axios.get("http://localhost:3001/reviews").then((response) => {
             setListOfReviews(response.data)
         })
-        
     }, []);
     
     return (
