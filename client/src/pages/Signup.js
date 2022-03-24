@@ -39,16 +39,6 @@ export default function Signup() {
         }
 
         setLoading(false)
-
-        try {
-            await axios.post('http://localhost:3001/users/createUser', {
-                fbID: currentUser.uid,
-                nickname: JSON.stringify(nickname.current.value)
-            })
-        } catch (error) {
-            alert(error)
-        }
-
     }
     return (
         <>
