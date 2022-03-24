@@ -68,11 +68,11 @@ function Create() {
                     break;
 
                 case "2":
-                    setrcategory("Книга")
+                    setrcategory("Книгу")
                     break;
 
                 case "3":
-                    setrcategory("Игра")
+                    setrcategory("Игру")
                     break;
             }
             try {

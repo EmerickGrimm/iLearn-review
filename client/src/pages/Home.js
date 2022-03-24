@@ -21,9 +21,8 @@ function Home() {
                 <div>
                     <Card  border="dark" bg="light" style={{width: '80rem', marginBottom: '20px', marginTop: '20px'}}>
                         <Card.Body>
-                            <Card.Title><i>{value.author}</i> оценил {value.subject} на {value.rating}/5, со словами </Card.Title>
+                            <Card.Title><i>{value.author}</i> оценил {value.category} {value.subject} на {value.rating}/5, со словами </Card.Title>
                             <Card.Text><i>{value.review}</i></Card.Text>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
                         </Card.Body>
                     </Card>
                 </div>)
